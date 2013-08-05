@@ -1,4 +1,4 @@
-ggg
+Generalized Generative Grammar
 ===
 
-Generalized Generative Grammar
+
