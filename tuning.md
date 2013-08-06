@@ -9,3 +9,5 @@ A better approach, if data is available, is to allow the grammar to tune itself 
 Markov babbling the grammar and running it in reverse will produce some useful biases, but they need to be demarcated so they can be weighed against actual validating input and eventually discarded.
 
 We might call this Bayesian Extended GLL, if we ever get it working. 
+
+A practical example of tuning might be a symbol category, with three regular rules that match Latin, Greek and Cyrillic characters. In the wild, it's like that that we might find all Latin, Latin with a little Greek, all Greek, all Cyrillic, and a few mixes. Weighting the `alt`s accordingly would speed things up: if you're finding Greek, stick with Greek as the first choice for awhile. Even simply trying the first regular expression from the last rule match is a good cache for many cases. 
