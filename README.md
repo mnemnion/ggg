@@ -221,7 +221,7 @@ For maximum keyboard convenience, GGG may be completely composed in ASCII. This 
 
 There are a few common characters we didn't use. `$` may substitute for `£`, sensibly enough, and you may use `%` instead of `±` and `::` instead of `§`. We do use `:` but we don't allow it twice. Good enough for input, but GGG should be faster to parse and cleaner than that. Negative lookahead is `-?`; rules can't start with a dash, so we're ok here. 
 
-The broken bar, `¦`, may be represented with bamboo `||`. The reference is to the shape in Go.
+The broken bar, `¦`, may be represented with bamboo `||`. The reference is to the shape in Go. Two regular alternators in a row is a syntax error in any mode, as is two `¦¦`, while `//` will be interpreted as a line comment by the formatter and a syntax error by GGG proper. 
 
 For optional whitespace a single `.` will suffice, though it must be surrounded by real whitespace on both sides. Nor may you say it twice; too much like the range operator while being syntactically obtuse. 
 
