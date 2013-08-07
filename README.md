@@ -143,15 +143,11 @@ In one line:
 
 I trust this is fairly readable. `~##` is a more straightforward version of `~#§2`. As a reminder, a subrule may be written as, e.g, `ÌPv4-fìrst-32-bìts.version`. There will be a mechanism for importing and renaming namespaces; the notation will probably use the function braces `[ ]` and there's little sense in providing it until there's an implementation that can use it.  
 
-##Whitespace Sugar
+##Whitespace and Separators Sugar
 
-There is a sugared form for whitespace and other padding. A rule named `_` is treated as whitespace, and must be a regular rule. It *may* be hidden by an implementation, but needn't be; a minimally compiant GGG implementation is pass/fail only and does nothing to the bitstream other than validate it. 
+There is a sugared form for whitespace and other padding. A rule named `_` is treated as whitespace, and must be a regular rule. It *may* be hidden by an implementation, but needn't be; a minimally compiant GGG implementation is pass/fail only and does nothing to the bitstream other than validate it. It behaves like any other regular rule, though it is literal if literally defined.
 
-`_` is a mandatory rule; it behaves as though it has an implicit `+` appended. `·` is provided implicitly as an optional variant, which *may* match the regular rule, as though appended with `*`. `·` *must not* be defined explicitly; it exists always and only if there is a rule named `_` in the namespace. You may *define* `_` to be optional, since regular rules allow this; in this case `·` has the same effect as `_`, but *may* provide it in a different fashion. 
-
-`_` is *not* mandatory in the sense that a GGG grammar must provide it, though like all GGG syntax, an implementation must support it. 
-
-It is noted that this sugar is not sufficient to handle nested comments. This is not an error; use a PEG, and another n?me. 
+`·` is a rule which may be defined as a separator. Unlike any other rule, this ends up in the grammar even if not referenced. The conventional use is to define a newline character for error reporting; it may be used for any regular pattern that demarcates boundaries, whether distinct from the logic of the grammar or not. 
 
 ##Parsing Expression Grammar Rules
 
