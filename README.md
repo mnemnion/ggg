@@ -221,6 +221,8 @@ For maximum keyboard convenience, GGG may be completely composed in ASCII. This 
 
 There are a few common characters we didn't use. `$` may substitute for `£`, sensibly enough, and you may use `%` instead of `±` and `::` instead of `§`. We do use `:` but we don't allow it twice. Good enough for input, but GGG should be faster to parse and cleaner than that. Negative lookahead is `-?`; rules can't start with a dash, so we're ok here. 
 
+The broken bar, `¦`, may be represented with bamboo `||`. The reference is to the shape in Go.
+
 For optional whitespace a single `.` will suffice, though it must be surrounded by real whitespace on both sides. Nor may you say it twice; too much like the range operator while being syntactically obtuse. 
 
 Literal strings, well, use `" "`. But keep in mind there is no string escaping, and you'll need to concatenate a literal 0x22 in between two literal strings to get ASCII `"`. That's the price you pay for not arming yourself with guillemets. 
