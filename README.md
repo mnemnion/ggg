@@ -217,7 +217,7 @@ Metadata starts with `μ{` and ends with `}`. The contents should be EDN format 
 
 ##ASCII input mode.
 
-For maximum keyboard convenience, GGG may be completely composed in ASCII. This format *must* be converted by a separate formatter. Please do not publish it or implement it directly, God forbid. 
+For maximum keyboard convenience, GGG may be completely composed in ASCII. This format *must* be converted by a separate formatting stage. Please do not publish it or implement it directly, God forbid. 
 
 There are a few common characters we didn't use. `$` may substitute for `£`, sensibly enough, and you may use `%` instead of `±` and `::` instead of `§`. We do use `:` but we don't allow it twice. Good enough for input, but GGG should be faster to parse and cleaner than that. Negative lookahead is `-?`; rules can't start with a dash, so we're ok here. 
 
