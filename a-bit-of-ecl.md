@@ -14,3 +14,5 @@ T
 BAR
 > (compiled-function-p #'bar)
 ```
+
+As we see, both `defun` and `eval` compile, rather than interpret, Lisp forms.
