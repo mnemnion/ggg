@@ -2,7 +2,7 @@
 
 These are some quick checks on the underlying implementation of ECL:
 
-```common lisp
+```lisp
 > (defun foo(x) (1+ x))
 
 FOO
