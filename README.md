@@ -69,6 +69,8 @@ Note that every other rule, other than the top rule, is in a single level of sco
 
 Literal rule names *must* start with an ASCII letter, and may continue with any ASCII letter or digit, a `-`, or an `_`. By convention, dashes are used between words, and the underscore is used before a number meant as an index. Two underscores may used to indicate a generated symbol. This may develop the force of law; it is wise to follow this convention.
 
+Literal values, all values in fact, are always specified in big-endian fashion. This is *not* meant to imply an implementation, on the contrary in fact. Compliant implementations are expected to understand their architecture and do literal value recognition in the correct way for it. This is surely not too much to ask.
+
 The right side contains a literal representation of data. These literals may be specified in recognizable forms: `0b011010101`, `0x234ABG`, and `£QWxsIFlvdXIgQmFzZSBBcmUgU2l4dHkgRm91cg==`. The last is intended to represent MIME Base64. If there is a conventional prefix, I don't know it. 
 
 Let's steer away from things like `1.5`, though. That's not as literal as it looks. Similarly, you can't just up and say `25` in a literal. How many bits is `25`? Nope. You get binary, hex, and base-64.
@@ -105,7 +107,7 @@ The precedence of `|` is lower than that of concatenation, so `«foo» «bar» |
 
 We want to specify ranges and wildcards and repeaters and optionals, because this is what a regular language needs. We must be careful, because we're consuming binary. The range `0x00..0xAF` consumes 8 bits, if you want 16, it's `0x0000..0x00AF` you're looking for. Range is a binary operation of highest precedence. It is an error to place whitespace between the two values, which must be literal, of the same encoding, and such that the left value is less than the right value. 
 
-Wildcards start with `~`, and come in two flavors, bit and byte, which are `,` and `#` respectively. `~##,,,` matches 19 bits of whatever, and you can stick in some fields so `~##,1,` matches 19 bits if the 18th bit is a 1. Binary only, concatenation does most of the heavy lifting here. 
+Wildcards start with `~`, and come in two flavors, bit and byte, which are `,` and `#` respectively. `~##,,,` matches 19 bits of whatever, and you can stick in some fields so `~##,1,` matches 19 bits if the 18th bit is a 1. Binary only, concatenation does most of the heavy lifting here. As mentioned in literals, representation in GGG is big-endian, and no method to specify a little-endian rule is ever provided. Certainly you may write a preformatting script if you need one. 
 
 `!` before a rule matches a number of bits if they do not fit the rule. The match will consume however many bits were needed to verify, so handle with care: this rule is easiest to understand with matches of fixed width. `!~#0000,,,,` will match 16 bits if bits 9-12 are not 0. `!0xFFFFFF` will match three bytes that aren't black. 
 
