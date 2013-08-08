@@ -109,7 +109,7 @@ We want to specify ranges and wildcards and repeaters and optionals, because thi
 
 Wildcards start with `~`, and come in two flavors, bit and byte, which are `,` and `#` respectively. `~##,,,` matches 19 bits of whatever, and you can stick in some fields so `~##,1,` matches 19 bits if the 18th bit is a 1. Binary only, concatenation does most of the heavy lifting here. As mentioned in literals, representation in GGG is big-endian, and no method to specify a little-endian rule is ever provided. Certainly you may write a preformatting script if you need one. 
 
-`!` before a rule matches a number of bits if they do not fit the rule. The match will consume however many bits were needed to verify, so handle with care: this rule is easiest to understand with matches of fixed width. `!~#0000,,,,` will match 16 bits if bits 9-12 are not 0. `!0xFFFFFF` will match three bytes that aren't black. 
+`!` before a rule matches a number of bits if they do not fit the rule. The match will consume however many bits were needed to verify, so handle with care: this rule is easiest to understand with matches of fixed width. `!~#0000,,,,` will match 16 bits if bits 9-12 are not 0. `!0xFFFFFF` will match three bytes that aren't white. 
 
 `+` means at least one of previous, `*` means zero or more of previous, and `±` means zero or one of previous, but not more than one. This is solid ground, I reckon. `+,*,±` are unary operators in post position, with lower precedence than range and higher precedence than `|` (and hence, higher than concatenation).
 
