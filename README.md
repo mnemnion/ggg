@@ -115,7 +115,7 @@ Wildcards start with `~`, and come in two flavors, bit and byte, which are `,` a
 
 `+` and `*` are greedy by default. The thrifty/lazy versions are `\+` and `\*`. `~#\+ 0xFF` will consume bytes up to and including a `0xFF` while `~#+ 0xFF` will eat everything you give it a byte at a time and then fail, as there will be no bytes left that could equal `0xFF`.
 
-There is a multiply operator which matches exactly the number of patterns specified. Although there is an `×` character in the set, `x` is a valid rule name, and confusion is unfortunate. `§` is chosen as at least somewhat mnemonic; there are n sections in `§n`. To illustrate: `«foo»§3` matches exactly and only `foofoofoo`. The precedence is the same as the unary operators, and `n` must be a decimal integer greater than one. 
+There is a multiply operator which matches exactly the number of patterns specified. Although there is an `×` character in the set, `x` is a valid rule name, and confusion is unfortunate. `§` is chosen as at least somewhat mnemonic; there are n sections in `§n`. To illustrate: `«foo»§3` matches exactly and only `foofoofoo`. The precedence is the same as the unary operators, and `n` must be a decimal integer greater than one. The range operator may be used, so that `«foo»§0..3` would match up to three `foo` in a row, or none. It is an error for the value on the right to be less than that on the left.
 
 Regular rules can also be concatenations of other regular rules, with a key restriction: no recursion of any sort is allowed. Recursion promotes your rule to PEG and will change your accent mark accordingly in the formatting pass. This *should* be treated as a non-fatal error, rather than merely warned against. 
 
@@ -155,7 +155,7 @@ There is a sugared form for whitespace and other padding. A rule named `_` is tr
 
 [Parsing Expression Grammars](http://en.wikipedia.org/wiki/Parsing_expression_grammar) are a fairly general class of grammar. The key limitation is that they are deterministic: choices are always evaluated in a particular order, and a grammar defined only in PEG terms cannot be ambigous. It will always parse a given input in exactly one way.
 
-PEG rules names are similar to regular rule names, except the required character set is `ÁÉÍÓÚáéíóú´`. There is no particular mnemonic to the choice of accent. They come in a specific order in Latin-1, and that order is what we use. As always, if your rule is PEG, the formatter will accent the name accordingly. There is no particular reason to type the accents when composing.
+PEG rules names are similar to regular rule names, except the required character set is `ÁÉÍÓÚáéíóú´`. There is no particular mnemonic to the choice of accent. They come in a specific order in Latin-1, and that order is what we use. As always, if your rule is PEG, the formatter will accent the name accordingly. There is no particular reason to type the accents on a definition when composing, and the invocation of a rule must be accented only if there are multiple instances of the name (a regular fòo and a peg fóo, for example).
 
 The accent marks are a key part of the system: they allow one to determine at a glance the precedence of any rule, anywhere within a grammar. GGG has an exact but somewhat convoluted expectation for what will happen at any given point in a parse, and the key to understanding the precedence is to know which kind of rule you're dealing with. 
 
