@@ -1,0 +1,9 @@
+#Tuned Parsing With Infinite Recursive Single Assignment
+
+To tune a parser, we must know where we are in the call stack. This is tracked in the typical parser anyway, for clear reasons, but here we need it to be very cheap.
+
+We start with single assignment form: converting every instance of a rule to a unique version of that rule. So if there are three contexts in which the rule `foo` may appear, we have a `foo_1`, a `foo_2` and a `foo_3`. Except to make it really cheap, we'll use primes, so foo 2, and 3, and 5. 
+
+What if the whole grammar is `foo = foo + | "foo"`? It's recursive, so we have `foo_2`, which matches `"foo"`, and `foo_3`, which matches any number of foo rules. So when `foo_3` calls a `foo_2`, how do we turn that into a new rule, without blowing up the table with an infinite regress?
+
+We lazily multiply...arse. 
