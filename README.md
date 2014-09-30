@@ -75,6 +75,8 @@ The right side contains a literal representation of data. These literals may be 
 
 Let's steer away from things like `1.5`, though. That's not as literal as it looks. Similarly, you can't just up and say `25` in a literal. How many bits is `25`? Nope. You get binary, hex, and base-64.
 
+These literals are **conservative** in all cases. A single numeral in binary specifies one bit, hexidecimal specifies 4, and base-64 specifies six. Naturally, null values in the highest significance are valid: we are doing recognition, not arithmetic.
+
 `0%` is reserved for representing literal floating point data, if we can design a syntax that is both readable and bit-identical in all cases. 
 
 Literal data can be anything, but forsooth it is often strings, and often those strings are ASCII. We provide some sugar for this eventuality. `«a literal string»` may contain anything printable in the lower 127, including line feeds and tabs, because I'm feeling generous. It would be perverse, I feel, to provide the rest of Latin-1 in what is already a weird (if eminently well established) way to map numbers to glyphs on screen. For one thing, a string, as defined here, cannot contain its delimiting characters. For how many languages, dear Reader, can we say the same?
