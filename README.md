@@ -83,6 +83,10 @@ Literal data can be anything, but forsooth it is often strings, and often those 
 
 Perverse doesn't begin to describe Unicode. We could allow some demonic variant of GGG in which, while a Unicode is chosen, all characters outside of `«` and `»` are validated for Latinitude. It would need to be clearly marked, as reeking of gin. 
 
+Pardon my laconic sense of humour. You are in fact quite welcome to embed any valid UTF-8 character except the closing delimiter `»` into your literal string. The character we're looking for is 187, or `10111011` in binary. This is not a valid leading byte in UTF-8, which is very fast to parse through if you're just validating. So we'll validate as UTF-8 inside a literal string. It will look very weird in Latin-1, I promise you.
+
+Oh and I promised no need for string escaping since this is a byte-at-a-time parser with zero lookahead. `»` is a perfectly cromulent UTF-8 character, while the byte 187 is not and never shall it be, for it begins with an 10, and is a continuation, verily and always. Aren't you happy I think about these things? 
+
 Let us note: `«a literal string»` is a number, and each character is a byte. ASCII yes, Latin-1, yes, UTF-8, yes, UTF-16, **no** they are **not** the same **at all**. 
 
 No, I truly feel that Unicode code points have unique 26-character-range-limited names for a reason. Let's use those, shall we? It shouldn't take more than several months diligent work to type it all up. We have `/`, we can specify all the different encodings in a single pass! 😈 SMILING FACE WITH HORNS U+1F608 (U+D83D U+DE08), UTF-8: F0 9F 98 88. As my Mac would put it. 
