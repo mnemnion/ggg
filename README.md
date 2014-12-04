@@ -89,6 +89,8 @@ Oh and I promised no need for string escaping since this is a byte-at-a-time par
 
 The parser will reject any invalid Unicode except if it contains a 187, in which case, it will probably get confused. However this is a **site for grammar injection** so presanitize your Unicode or I will not be held responsible. The test suite will break you on this.
 
+This does introduce a quirk: it's not pretty or easy to embed valid UTF-8 into Latin-1, though the result is printable by design. A valid formatter will accept Unicode and convert the glyphs to their Latin-1 equivalents, being smart enough to leave literal strings alone. A GGG parser-parser will barf on anything not formatted.
+
 Let us note: `«a literal string»` is a number, and each character is a byte. ASCII yes, Latin-1, yes, UTF-8, yes, UTF-16, **no** they are **not** the same **at all**. 
 
 No, I truly feel that Unicode code points have unique 26-character-range-limited names for a reason. Let's use those, shall we? It shouldn't take more than several months diligent work to type it all up. We have `/`, we can specify all the different encodings in a single pass! 😈 SMILING FACE WITH HORNS U+1F608 (U+D83D U+DE08), UTF-8: F0 9F 98 88. As my Mac would put it. 
