@@ -225,7 +225,7 @@ To indicate that rules or literals should be hidden, put them in brackets, like 
 
 Comments begin with `//` and terminate in a newline. Block comments begin with `</` and end with `\>`. They do not nest.  
 
-Metadata starts with `μ{` and ends with `}`. The contents should be EDN format restricted to printable ASCII characters, though I suppose any format that requires balanced angle brackets will work. Compliant GGG must recognize metadata, and may use it, but functions may *not* access it. 
+Metadata starts with `μ{` and ends with `}`. The contents should be EDN format restricted to printable ASCII characters, though I suppose any format that requires balanced angle brackets will work. Compliant GGG must recognize metadata, and may use it, but functions may *not* access it directly. Metadata may be formatted in any fashion, so long as `{` and `}` remain balanced. No other paired characters need be considered by a GGG pass through metadata. 
 
 ##ASCII input mode.
 
