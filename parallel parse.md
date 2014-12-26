@@ -15,7 +15,9 @@ We take the lifted set and apply regular elimination to it. There are contexts w
 
 Note that this is using a restricted version of the regular rule, when possible. For strings, we merely have to check for string escaping, and can eliminate all literals between pairs. The engine knows which literals it can collect, which ones belong to regular expressions, and how to validate that the literals within the expression are well-formed. 
 
-All we do is eliminate literals here, and promote posslbe regular matches.  Note also that this step runs in parallel. 
+All we do is eliminate literals here, and promote posslbe regular matches.  Note also that this step runs in parallel, requires a separate array for kernels to communicate, and may involve a few (quadratic? to some small number) backtracks across the owned stripe of the string. String escaping remains a good example, we have to cross communicate to figure out what's outside and what's inside, and might be wrong at first, detect a `\"` and have to refix. A pathological collection of strings might backtrack, I hypothesize, by the number of escapes detected, though it may be possible to make this stage single-pass through sheer cleverness. 
+
+This is the step that makes this approach fast, if fast indeed it is. The critical step is converting a regular expression into a negative expression, which is never slower than the regex and is often faster. I am lacking a general transformation for this step at present. 
 
 ## Ordering
 
