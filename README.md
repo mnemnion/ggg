@@ -14,7 +14,7 @@ GGG is an input format. The output is implementation specific: the reference tar
 
 Implementations are not required to be fully compliant; they may implement only particular subsets of GGG grammar, the first G being Generalized. They are required to parse the full formatted GGG specification, but may refuse to execute if desired. 
 
-##Rationale
+## Rationale
 
 In 19xx, [Niklaus Wirth](http://addme.com) published a paper, which proposed a standardized format for extending BNF format. This grammar format, while excellent, was a) designed around strings and b) predates the GLL algorithm. It is also purely declarative, allowing no execution semantics to be used as part of recognition. 
 
