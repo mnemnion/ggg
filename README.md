@@ -161,7 +161,7 @@ There is a sugared form for whitespace and other padding. A rule named `_` is tr
 
 `·` is a rule which may be defined as a separator. Unlike any other rule, this ends up in the grammar even if not referenced. The conventional use is to define a newline character for error reporting; it may be used for any regular pattern that demarcates boundaries, whether distinct from the logic of the grammar or not. 
 
-##Parsing Expression Grammar Rules
+## Parsing Expression Grammar Rules
 
 [Parsing Expression Grammars](http://en.wikipedia.org/wiki/Parsing_expression_grammar) are a fairly general class of grammar. The key limitation is that they are deterministic: choices are always evaluated in a particular order, and a grammar defined only in PEG terms cannot be ambigous. It will always parse a given input in exactly one way.
 
