@@ -25,7 +25,7 @@ The human mind and our current computational machines are optimized differently.
 Grammars are a rare meeting of the minds, wherein language, made sufficiently precise, takes on the mathematical character which our machines require. GGG is an EBNF with a binary focused, mix-and-match philosophy, empowered by modern algorithms to specify formats and types in a single, largely declarative, human readable syntax. 
 
 
-##Encoding.
+## Encoding.
 
 The format of GGG is unusual: It is to be encoded in Latin-1, ISO 8859-1. I strongly believe that one byte is exactly enough to specify a standard of such importance as GGG. 127 code points is kind of light, though. Latin-1 is exactly as well defined as ASCII, in practice well supported: Emacs, Sublime/TM, Vim have no problem editing Latin-1, and I consider that conclusive. 
 
@@ -45,7 +45,7 @@ GGG insists on not using ASCII or Unicode as a representation format. Digraphs h
 
 Let's write some!
 
-##Generalities
+## Generalities
 
 GGG is a tool for representing data. It is written by someone who considers Unicode a poor level of aggregation, as part of a tool set for making it practical to not have to use it. It is not designed around the paradigm of strings, although it makes a few concessions to it. 
 
@@ -65,7 +65,7 @@ Scope is specified explicitly with `{` and `}`, which enclose rules. The first r
 
 Note that every other rule, other than the top rule, is in a single level of scope. The names must be distinctive and there is only one level of subclassing per scope. This is in contract to the logical structure of rules, which can become deeply and arbitrarily co nested. 
 
-##Literals
+## Literals
 
 Literal rule names *must* start with an ASCII letter, and may continue with any ASCII letter or digit, a `-`, or an `_`. By convention, dashes are used between words, and the underscore is used before a number meant as an index. Two underscores may used to indicate a generated symbol. This may develop the force of law; it is wise to follow this convention.
 
@@ -103,7 +103,7 @@ Note that any single ASCII character is a perfectly valid literal rule name. Dig
 
 More than one literal value may be provided on the right side of a literal rule. This is implicit concatenation, and the rule matches only to all values provided, in the order provided. 
 
-##Regular Rules
+## Regular Rules
 
 Regular rules follow the logic of a lexer or a regular expression engine, but on binary data. There is less sugar on the one hand, and the need to specify bit fields on the other. It's a different flavor. 
 
@@ -155,7 +155,7 @@ In one line:
 
 I trust this is fairly readable. `~##` is a more straightforward version of `~#§2`. As a reminder, a subrule may be written as, e.g, `ÌPv4-fìrst-32-bìts.version`. There will be a mechanism for importing and renaming namespaces; the notation will probably use the function braces `[ ]` and there's little sense in providing it until there's an implementation that can use it.  
 
-##Whitespace and Separators Sugar
+## Whitespace and Separators Sugar
 
 There is a sugared form for whitespace and other padding. A rule named `_` is treated as whitespace, and must be a regular rule. It *may* be hidden by an implementation, but needn't be; a minimally compiant GGG implementation is pass/fail only and does nothing to the bitstream other than validate it. It behaves like any other regular rule, though it is literal if literally defined.
 
@@ -185,7 +185,7 @@ An important point about "PEG" syntax: GGG allows all forms of recursion, includ
 
 GLL is the reference algorithm for non-functional GGG. [Instaparse](https://github.com/Engelberg/instaparse), which implements GLL, allows for flexible mixing of PEG and CFG syntax, as well as all forms of recursion. This suggests to me that the more restrictive syntax of GGG can be implemented performatively using the same algorithm. Functional GGG could plausibly implement its operations on top of the existing stack tree, as the functions have no way to 'call out'. 
 
-##Context-Free Grammar Rules
+## Context-Free Grammar Rules
 
 Explicit order is not always helpful, and ambiguity can be the most natural way to define something. GGG is concerned primarily with validation, and it is often easy to write a grammar that can validate a given atom in a number of ways. 
 
@@ -195,7 +195,7 @@ It should be possible to support `&` as a binary operator with the same preceden
 
 `?` and `¿` may be used in CFG rules, but `/` may not, to promote separation between CFG and PEG rules, as well as to avoid precendence assignment between `/` and `¦`. It is better form not to mix lookahead and CFG syntax, for two reasons: it may imply to the reader a greedy `+` or `*`, and there are many classes of grammar where only CFG or PEG rules, but not both, will be provided. These may be efficiently implemented using their respective techniques: using only enough algorithm for the job is a goal of GGG. CFG rules that use lookahead are contaminated, requiring PEG techniques for realization. This is allowed, but not encouraged. 
 
-##Function Rules
+## Function Rules
 
 We are not defining a syntax for functions at present. It is likely they will use `[` and `]` where Lisp uses parentheses, in order to avoid collision with `( )`, used in the usual mathematical fashion, and `{ }`, which provides scoping. Overloading of symbols within a functional context is an inevitability, making it all the more important that the outermost enclosure be clean. 
 
@@ -215,7 +215,7 @@ The language used to specify functions must perforce be a complete one, within t
 
 The reference to the digest points to the major reason why functional GGG is undefined at present: any useful function should have the parse tree thus far constructed and the cursor, which points to the rest of the bitstream. It cannot alter them but may examine them. We haven't specified a representation for a parse tree, and don't intend to do so immediately. Without one, functional notation is pointless.
 
-##Optional Grammar
+## Optional Grammar
 
 Optional grammar is mandatory, that is, a GGG implementation *must* recognize it. It is optional in the sense that it specifies behaviors that a GGG implementation *may or may not* provide.
 
@@ -227,7 +227,7 @@ Comments begin with `//` and terminate in a newline. Block comments begin with `
 
 Metadata starts with `μ{` and ends with `}`. The contents should be EDN format restricted to printable ASCII characters, though I suppose any format that requires balanced angle brackets will work. Compliant GGG must recognize metadata, and may use it, but functions may *not* access it directly. Metadata may be formatted in any fashion, so long as `{` and `}` remain balanced. No other paired characters need be considered by a GGG pass through metadata. 
 
-##ASCII input mode.
+## ASCII input mode.
 
 For maximum keyboard convenience, GGG may be completely composed in ASCII. This format *must* be converted by a separate formatting stage. Please do not publish it or implement it directly, God forbid. 
 
